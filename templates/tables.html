@@ -1,0 +1,108 @@
+{% extends 'index.html' %}
+
+{% block title %}home{% endblock title %}
+
+{% block body %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Contact List Details</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>SNo</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Mobile Number</th>
+                        <th>Subject</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for entry in entrys %}
+                    <tr>
+                        <td>{{entry.id}}</td>
+                        <td>{{entry.name}}</td>
+                        <td>{{entry.email}}</td>
+                        <td>{{entry.phoneno}}</td>
+                        <td>{{entry.subject}}</td>
+                        <td>{{entry.address}}</td>
+                         <td>{{entry.city}}</td>
+                        <td>{{entry.state}}</td>
+                        <td>
+                          <a href="/edit/{{entry.id}}" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{entry.id}}">
+                              Edit
+                            </a>
+                            <a href="/delete/{{entry.id}}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                     <!-- Modal -->
+                        <div class="modal fade" id="exampleModal{{entry.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Make Change Here</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                               <div class="container my-3" style="font-family:'times new roman' ">
+                                <h1>Add Contacts</h1>
+                                    <form action="/edit/{{entry.id}}" method="post">
+                                        <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input type="text" class="form-control" id="name" name="name" value='{{entry.name}}' placeholder="Your Name">
+                                        </div>
+                                      <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                          <label for="inputEmail4">Email</label>
+                                          <input type="email" class="form-control" id="inputEmail4" name="email" value='{{entry.email}}' placeholder="Your Email">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                          <label for="inputPassword4">Mobile No.</label>
+                                          <input type="text" class="form-control" id="inputPassword4" name="mobile" value='{{entry.phoneno}}' placeholder="Your Mobile">
+                                        </div>
+                                      </div>
+                                        <div class="form-group">
+                                            <label for="subject">Subject</label>
+                                            <input type="text" class="form-control" id="subject" name="subject" value='{{entry.subject}}' placeholder="Your Work">
+                                        </div>
+                                      <div class="form-group">
+                                        <label for="inputAddress">Address</label>
+                                        <input type="text" class="form-control" id="inputAddress" name="address" value='{{entry.address}}' placeholder="Your Address">
+                                      </div>
+                                      <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                          <label for="inputCity">City</label>
+                                          <input type="text" class="form-control" name="city" id="inputCity" value='{{entry.city}}' placeholder="Your City">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                          <label for="inputState">State</label>
+                                          <input type="text" class="form-control" name="state" id="inputState" value='{{entry.state}}' placeholder="Your State">
+                                        </div>
+                                      </div>
+                                      <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
+{% endblock body %}
